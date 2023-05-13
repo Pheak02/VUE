@@ -7,6 +7,21 @@
     <title>Vue 3 Basics</title>
   </head>
   <body>
-    <div>Hello Vue 3</div>
+    <div id="app">
+      Hello Vue 3
+      <!-- DOM element-->
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data: function () {
+          return {
+            //in data, there's return obj, that can put varible in.
+            greeting: "Hello Vue 3!",
+          };
+        },
+      });
+      app.mount("#app"); //connect vue app to html
+    </script>
   </body>
 </html>
