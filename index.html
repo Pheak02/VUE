@@ -11,12 +11,6 @@
         height: 200px;
         width: 200px;
       }
-      .box.two {
-        background-color: red;
-      }
-      .box.three {
-        background-color: blue;
-      }
       [v-cloak] {
         display: none;
       }
@@ -25,12 +19,11 @@
   <body>
     <div id="app" v-cloak>
       <!-- CALL VARIABLE WITH {{}} WHICH MEANS WILL PASSED AS JS BY VUE -->
-      {{greeting}} {{welcome}}
+      {{greeting}}
       <input v-model="greeting" />
       <hr />
+      <button v-on:click="isVisible=true">Show Box</button>
       <div v-if="isVisible" class="box"></div>
-      <div v-else-if="isVisible2" class="box two"></div>
-      <div v-else class="box three"></div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -39,9 +32,7 @@
           return {
             //in data, there's return obj, that can put varible in.
             greeting: "Hello Vue 3!",
-            welcome: "Welcome to our new system",
-            isVisible: true, //if var is ture, will display
-            isVisible2: false,
+            isVisible: false, //if var is ture, will display
           };
         },
       });
