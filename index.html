@@ -20,7 +20,7 @@
     <div id="app" v-cloak>
       <!-- CALL VARIABLE WITH {{}} WHICH MEANS WILL PASSED AS JS BY VUE -->
       {{greeting}}
-      <input @keyup.enter="greet" v-model="greeting" />  <!-- listen to the keyup event  -->
+      <input @keyup.enter="greet(keyword)" v-model="greeting" />  <!-- listen to the keyup event  -->
      
       <hr />
       <button @click="toggleBox">Toggle Box</button>
