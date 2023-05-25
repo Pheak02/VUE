@@ -18,13 +18,16 @@
   </head>
   <body>
     <div id="app" v-cloak>
+      <!-- FORM ELEMENTS -->
+      <login-form />
+
       <!-- CALL VARIABLE WITH {{}} WHICH MEANS WILL PASSED AS JS BY VUE -->
       {{greeting}}
       <input @keyup.enter="greet(greeting + '!!!!!')" v-model="greeting" />
       <!-- listen to the keyup event  -->
 
       <hr />
-      <button @click.  ="toggleBox">Toggle Box</button>
+      <button @click.="toggleBox">Toggle Box</button>
       <div v-if="isVisible" class="box"></div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -46,6 +49,17 @@
           },
         },
       });
+
+      // FOR THE FORM
+      app.component("login-form", {
+        template: `
+        <div>
+           <input type = "email" />
+           <input type= "password" />
+        </div>
+        `,
+      });
+
       app.mount("#app"); //connect vue app to html
     </script>
   </body>
