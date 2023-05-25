@@ -55,20 +55,26 @@
       });
 
       // FOR THE FORM - do all in 1 html file
+
       app.component("login-form", {
         template: `
         <form @submit.prevent="handleSubmit">
           <h1>{{title}} </h1>
-           <input type = "email" v-model="email" />
-           <input type= "password" v-model="password"/>
+           <custom-input type = "email" :label="emailLabel"dd /> //instead of using v-bind: , we can just use : instead. 
+      <!--  -->
+
+           <custom-input type= "password" :label="passwordLabel"/>
            <button> Log in</button>
         </form>
         `,
+        component: ["custom-input"],
         data() {
           return {
             title: "Login Form",
             email: "",
             password: "",
+            emailLabel: "Email",
+            passwordLabel: "Password",
           };
         },
         methods: {
@@ -77,7 +83,15 @@
           },
         },
       });
-
+      app.component("custom-input", {
+        template: `
+          <label>
+            {{label}} //will define it on the parent component, and pass it to the custom input component.
+            <input type= "text">
+            </label>
+        `,
+        props: ["label"],
+      });
       app.mount("#app"); //connect vue app to html
     </script>
   </body>
