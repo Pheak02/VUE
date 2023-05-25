@@ -60,10 +60,8 @@
         template: `
         <form @submit.prevent="handleSubmit">
           <h1>{{title}} </h1>
-           <custom-input type = "email" :label="emailLabel"dd /> //instead of using v-bind: , we can just use : instead. 
-      <!--  -->
-
-           <custom-input type= "password" :label="passwordLabel"/>
+           <custom-input v-model = "email" :label="emailLabel"/>
+           <custom-input v-model= "password" :label="passwordLabel"/>
            <button> Log in</button>
         </form>
         `,
@@ -86,11 +84,26 @@
       app.component("custom-input", {
         template: `
           <label>
-            {{label}} //will define it on the parent component, and pass it to the custom input component.
-            <input type= "text">
+            {{label}}
+            <input type= "text" v-model="inputValue">
             </label>
         `,
-        props: ["label"],
+        props: ["label", "modelValue"],
+        computed: {
+          inputValue: {
+            get() {
+              return this.modelValue;
+            },
+            set(value) {
+              this.$emit("update:modelValue", value);
+            },
+          },
+        },
+        // data(){
+        //   return{
+        //     inputValue: ''
+        //   }
+        // }
       });
       app.mount("#app"); //connect vue app to html
     </script>
