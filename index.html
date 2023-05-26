@@ -21,18 +21,10 @@
     </style>
   </head>
   <body>
-    <div id="app" v-cloak>
+    <div id="app">
       <!-- FORM ELEMENTS -->
-      <login-form />
-
-      <!-- CALL VARIABLE WITH {{}} WHICH MEANS WILL PASSED AS JS BY VUE -->
-      {{greeting}}
-      <input @keyup.enter="greet(greeting + '!!!!!')" v-model="greeting" />
-      <!-- listen to the keyup event  -->
-
-      <hr />
       <button @click.="toggleBox">Toggle Box</button>
-      <div v-if="isVisible" class="box"></div>
+      <test-box v-if="isVisible">
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -40,17 +32,30 @@
         data: function () {
           return {
             //in data, there's return obj, that can put varible in.
-            greeting: "Hello Vue 3!",
             isVisible: false, //if var is ture, will display
           };
         },
         methods: {
-          toggleBox() {
+          toggleBox: function () {
             this.isVisible = !this.isVisible;
           },
-          greet(greeting) {
-            console.log(greeting);
-          },
+        updated(){
+          console.log('updated')
+        }
+        },
+      });
+      app.component("test-box", {
+        template: `
+          <div class="box"></div>
+        `,
+        created() {
+          console.log("created");
+        },
+        mounted() {
+          console.log("mounted");
+        },
+        unmounted() {
+          console.log("unmounted");
         },
       });
 
