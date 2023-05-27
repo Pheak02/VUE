@@ -1,2 +1,0 @@
-- inside the template, we have v-model that has access to thing inslide the prop(modelValue)
-- v-model in the template is the PARENT COMPONEN - which get data from the data()
