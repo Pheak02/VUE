@@ -21,7 +21,7 @@
             <span>Past Orders</span>
           </a>
         </nav>
-        <a href="#" class="top-bar-cart-link">
+        <a @click="toggleSidebar" class="top-bar-cart-link">
           <i class="icofont-cart-alt icofont-1x"></i>
           <span>Cart (0)</span>
         </a>
@@ -150,6 +150,9 @@
         </div>
       </main>
 
+      <sidebar v-if="showSidebar" :toggle="toggleSidebar"> 
+        <!-- since toggleSidebar can't access into the card template, so need to specify it's here first. -->
+
       <footer></footer>
     </div>
 
@@ -158,6 +161,7 @@
       let app = Vue.createApp({
         data() {
           return {
+            showSidebar: false, //only show sidebar when it's true
             inventory: {
               carrots: 0,
               pineapples: 0,
@@ -176,18 +180,24 @@
             this.cart[type] += this.inventory[type];
             console.log(this.cart);
           },
+          toggleSidebar(){
+            this.showSidebar = !this.showSidebar
+          } 
         },
       });
 
       //FOR ADD TO THE CARD
-      <aside class="cart-container">
+      app.component("sidebar", {
+        props: ['toggle'], //but also has to accept it as a prop as well.
+        template: `
+        <aside class="cart-container">
         <div class="cart">
           <h1 class="cart-title spread">
             <span>
               Cart
               <i class="icofont-cart-alt icofont-1x"></i>
             </span>
-            <button class="cart-close">&times;</button>
+            <button @click="toggle" class="cart-close">&times;</button>
           </h1>
 
           <div class="cart-body">
@@ -234,9 +244,10 @@
           </div>
         </div>
       </aside>;
+        `,
+      });
 
       app.mount("#app");
     </script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </body>
 </html>
