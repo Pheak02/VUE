@@ -150,8 +150,8 @@
         </div>
       </main>
 
-      <sidebar v-if="showSidebar" :toggle="toggleSidebar"> 
-        <!-- since toggleSidebar can't access into the card template, so need to specify it's here first. -->
+      <sidebar v-if="showSidebar" :toggle="toggleSidebar" :cart="cart" />
+      <!-- since toggleSidebar can't access into the card template, so need to specify it's here first. -->
 
       <footer></footer>
     </div>
@@ -180,15 +180,15 @@
             this.cart[type] += this.inventory[type];
             console.log(this.cart);
           },
-          toggleSidebar(){
-            this.showSidebar = !this.showSidebar
-          } 
+          toggleSidebar() {
+            this.showSidebar = !this.showSidebar;
+          },
         },
       });
 
       //FOR ADD TO THE CARD
       app.component("sidebar", {
-        props: ['toggle'], //but also has to accept it as a prop as well.
+        props: ["toggle", "cart"], //but also has to accept it as a prop as well.
         template: `
         <aside class="cart-container">
         <div class="cart">
@@ -223,8 +223,8 @@
                   </td>
                   <td>Carrot</td>
                   <td>$1.00</td>
-                  <td class="center">1</td>
-                  <td>$1.00</td>
+                  <td class="center">{{cart.carrots}}</td>
+                  <td>\${{cart.carrots *4.82}}</td>
                   <td class="center">
                     <button class="btn btn-light cart-remove">&times;</button>
                   </td>
