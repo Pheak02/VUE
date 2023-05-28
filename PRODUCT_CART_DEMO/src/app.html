@@ -191,7 +191,7 @@
         props: ["toggle", "cart"], //but also has to accept it as a prop as well.
         computed: {
           cartTotal() {
-            return this.cart.carrots * 4.82;
+            return (this.cart.carrots * 4.82).toFixed(2);
           },
         },
         template: `
